@@ -1,0 +1,136 @@
+<mvc:View controllerName="zbouzios2.controller.View1"
+		height="100%"
+		xmlns:mvc="sap.ui.core.mvc"
+        xmlns:table="sap.ui.table"
+		xmlns:core="sap.ui.core"
+		xmlns="sap.m"
+		xmlns:f="sap.f"
+		xmlns:fb="sap.ui.comp.filterbar"
+		xmlns:svm="sap.ui.comp.smartvariants">
+		<f:DynamicPage headerExpanded="{/headerExpanded}">
+			<f:header>
+				<f:DynamicPageHeader>
+					<f:content>
+						<fb:FilterBar id="filterbar" persistencyKey="myPersKey" useToolbar="false" search=".onSearch" filterChange=".onFilterChange">
+							<fb:filterGroupItems>
+								<fb:FilterGroupItem name="Product" label="ProductNumber" groupName="Group1" visibleInFilterBar="true">
+									<fb:control>
+                                        <Input
+                                            id="inputProduct"
+                                            name="Product"
+                                            placeholder="Type product name here..."
+                                        />
+									</fb:control>
+								</fb:FilterGroupItem>
+								<fb:FilterGroupItem name="ProductType" label="ProductType" groupName="Group1" visibleInFilterBar="true">
+									<fb:control>
+                                        <Input
+                                            id="inputProductType"
+                                            name="ProductType"
+                                            placeholder="Type product type here..."
+                                        />
+									</fb:control>
+								</fb:FilterGroupItem>
+                                <fb:FilterGroupItem name="CreationDate" label="CreationDate" groupName="Group1" visibleInFilterBar="true">
+                                    <fb:control>
+                                        <DatePicker
+                                            id="inputCreationDate"
+                                            name="CreationDate"
+                                            displayFormat="long"
+                                            valueFormat="yyyy-MM-dd" />
+                                        </fb:control>
+                                </fb:FilterGroupItem>
+							</fb:filterGroupItems>
+						</fb:FilterBar>
+					</f:content>
+				</f:DynamicPageHeader>
+			</f:header>
+			<f:content>
+				<table:Table id="table"
+							rows="{path: '/A_Product'}"
+							selectionMode="MultiToggle"
+							visibleRowCount="10"
+							enableCellFilter="{ui>/cellFilterOn}"
+							threshold="100">
+					<table:extension>
+						<Toolbar class="sapMTBHeader-CTX">
+							<Button text="Save" id="save" press="onSavePress" />
+							<Button text="Modify" id="modify" press="onModifyPress" />
+							<Button text="Export" id="export" press="onExportPress" />
+						</Toolbar>
+					</table:extension>
+					<table:columns>
+						<table:Column width="200px" sortProperty="Product" filterProperty="Product">
+							<Label text="Product" />
+							<table:template>
+								<Input value="{Product}" editable="false" />
+							</table:template>
+						</table:Column>
+						<table:Column width="100px" sortProperty="ProductType" filterProperty="ProductType">
+							<Label text="ProductType" />
+							<table:template>
+								<Input value="{ProductType}" editable="false" />
+							</table:template>
+						</table:Column>
+						<table:Column width="200px" sortProperty="CreationDate" filterProperty="CreationDate">
+							<Label text="CreationDate" />
+							<table:template>
+								<Input value="{
+									path: 'CreationDate',
+									type: 'sap.ui.model.type.Date',
+									formatOptions: {
+									pattern: 'dd/MM/yyyy',
+									UTC: true
+								}
+							}" editable="false" />
+							</table:template>
+						</table:Column>
+						<table:Column width="100px" sortProperty="GrossWeight" filterProperty="GrossWeight">
+							<Label text="GrossWeight" />
+							<table:template>
+								<Input value="{
+									path: 'GrossWeight',
+									type: 'sap.ui.model.type.Float',
+									formatOptions: {
+										groupingSeparator: '.',
+										decimalSeparator: ','
+									}
+								}" editable="false" />
+							</table:template>
+						</table:Column>
+						<table:Column width="100px" sortProperty="WeightUnit" filterProperty="WeightUnit">
+							<Label text="WeightUnit" />
+							<table:template>
+								<Input value="{WeightUnit}" editable="false" />
+							</table:template>
+						</table:Column>
+						<table:Column width="100px" sortProperty="NetWeight" filterProperty="NetWeight">
+							<Label text="NetWeight" />
+							<table:template>
+								<Input value="{
+									path: 'NetWeight',
+									type: 'sap.ui.model.type.Float',
+									formatOptions: {
+										groupingSeparator: '.',
+										decimalSeparator: ','
+									}
+								}" editable="false" />
+							</table:template>
+						</table:Column>
+						<table:Column width="100px" sortProperty="ProductGroup" filterProperty="ProductGroup">
+							<Label text="ProductGroup" />
+							<table:template>
+								<Input value="{ProductGroup}" editable="false" />
+							</table:template>
+						</table:Column>
+						<table:Column width="200px" sortProperty="ItemCategoryGroup" filterProperty="ItemCategoryGroup">
+							<Label text="ItemCategoryGroup" />
+							<table:template>
+								<Input value="{ItemCategoryGroup}" editable="false" />
+							</table:template>
+						</table:Column>
+					</table:columns>
+				</table:Table>
+			</f:content>
+		</f:DynamicPage>
+</mvc:View>
